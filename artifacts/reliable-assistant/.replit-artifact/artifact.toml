@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Reliable Assistant"
+description = "A welcoming business website for an independent virtual assistant offering affordable, dependable administrative support to solo entrepreneurs and small businesses."
+version = "1.0.0"
+id = "artifacts/reliable-assistant"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18424
+
+[services.development]
+run = "pnpm --filter @workspace/reliable-assistant run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/reliable-assistant", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/reliable-assistant/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18424"
+BASE_PATH = "/"
