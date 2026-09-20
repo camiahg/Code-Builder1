@@ -178,7 +178,7 @@ function Home() {
           <div className="relative z-10 max-w-[650px]">
             <div className="reveal eyebrow mb-6 flex items-center gap-3"><span className="h-px w-8 bg-[hsl(var(--accent))]" />Human execution for digital work</div>
             <h1 className="reveal reveal-delay-1 display-title text-[clamp(3.55rem,8vw,7.8rem)] text-[hsl(var(--primary))]">
-              AI built your drafts.<br />
+              AI built your drafts?<br />
               <span className="text-[hsl(var(--accent))]">Smart tech needs smarter execution.</span>
             </h1>
               <p className="reveal reveal-delay-2 mt-7 max-w-[530px] text-[1.06rem] leading-8 text-[hsl(var(--muted-foreground))]">
