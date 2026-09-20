@@ -80,12 +80,12 @@ const faqs = [
   {
     question: 'Do I have to know exactly what to delegate?',
     answer:
-      'Not at all. Tell me what keeps getting pushed to tomorrow, and we can turn that list into a clear first step together.',
+      'Not at all. Tell me what keeps getting pushed to tomorrow, and I can turn that list into a clear first step with you.',
   },
   {
     question: 'Can you work with my existing tools?',
     answer:
-      'Usually, yes. We can talk through the email, calendar, spreadsheet, shop, or task tools you already use and decide what makes sense for the work.',
+      'Usually, yes. I can talk through the email, calendar, spreadsheet, shop, or task tools you already use and decide what makes sense for the work.',
   },
   {
     question: 'Are you offering AI services right now?',
@@ -372,7 +372,7 @@ function Home() {
           <div className="divide-y divide-[hsl(var(--border))]">
             {[
               ['01', 'Tell me what is taking too long', 'Send a note about the task, the backlog, or the part of your week that keeps getting squeezed.'],
-              ['02', 'We make the scope clear', 'We will talk through the details, tools, timing, and the right way to price it before work starts.'],
+              ['02', 'I make the scope clear', 'I will talk through the details, tools, timing, and the right way to price it before work starts.'],
               ['03', 'You get breathing room', 'I take on the agreed work, keep you updated when needed, and flag anything that needs your call.'],
             ].map(([number, title, body]) => (
               <div key={number} className="grid gap-4 py-7 sm:grid-cols-[70px_1fr] sm:gap-8" data-testid={`step-${number}`}>
