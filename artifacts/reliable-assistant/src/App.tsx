@@ -181,7 +181,7 @@ function Home() {
               <span className="text-[hsl(var(--accent))]">Smart tech needs smarter execution.</span>
             </h1>
               <p className="reveal reveal-delay-2 mt-7 max-w-[530px] text-[1.06rem] leading-8 text-[hsl(var(--muted-foreground))]">
-              Software generates the noise, but execution takes human precision. I combine computer science literacy, pharmacy accuracy, and real-world operations experience to handle the client messages and back-office cleanups your tech stack leaves behind.
+              Software generates the noise, but execution takes human precision. I combine computer science literacy, pharmacy accuracy, and real-world operational experience to handle the client messages and back-office cleanups your tech stack leaves behind.
             </p>
             <div className="reveal reveal-delay-3 mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <a href="#contact" className="button-primary focus-ring" data-testid="button-hero-inquiry">Tell me what&apos;s taking your time <ArrowRight size={16} /></a>
