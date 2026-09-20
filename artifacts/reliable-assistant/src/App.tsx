@@ -1,5 +1,6 @@
 import { type FormEvent, type ReactNode, useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import aboutPhoto from '@assets/0_IMG_2303_1789909271019.jpeg';
 import {
   ArrowDownRight,
   ArrowRight,
@@ -336,13 +337,14 @@ function Home() {
         <section className="border-y border-[hsl(var(--border))] bg-[hsl(var(--muted)/.45)] py-28 md:py-36" id="about">
           <div className="container-wide grid gap-14 md:grid-cols-[.9fr_1.1fr] md:items-center md:gap-24">
             <div className="relative mx-auto w-full max-w-[400px]">
-              <div className="ink-grid absolute inset-5 rotate-3 rounded-[24px] border border-[hsl(var(--accent)/.4)]" />
-              <div className="relative rounded-[24px] bg-[hsl(var(--accent))] p-8 text-[hsl(var(--accent-foreground))] shadow-[var(--shadow-md)]">
-                <div className="flex items-center justify-between font-mono text-[.63rem] uppercase tracking-[.14em]"><span>behind the scenes</span><span>01 / 01</span></div>
-                <div className="my-20">
-                  <p className="font-display text-[4.2rem] leading-[.85] tracking-[-.06em]">steady<br /><span className="text-[hsl(var(--secondary))]">hands.</span></p>
-                </div>
-                <div className="border-t border-[hsl(var(--accent-foreground)/.3)] pt-4 text-sm leading-6">Real-world responsibility, brought to the digital to-do list.</div>
+              <div className="absolute inset-5 rounded-full border border-[hsl(var(--accent)/.45)]" />
+              <div className="absolute -right-2 top-5 h-20 w-20 rounded-full bg-[hsl(var(--secondary))] opacity-80" />
+              <div className="relative mx-auto aspect-square w-[min(100%,360px)] overflow-hidden rounded-full border-[10px] border-[hsl(var(--background))] bg-[hsl(var(--primary))] shadow-[0_18px_45px_rgba(29,79,73,.18)] ring-1 ring-[hsl(var(--accent)/.55)]">
+                <img src={aboutPhoto} alt="Camiah looking out over the water at sunset" className="h-full w-full object-cover object-[68%_50%]" />
+              </div>
+              <div className="relative mx-auto mt-5 flex max-w-[260px] items-center justify-center gap-3 rounded-full border border-[hsl(var(--border))] bg-[hsl(var(--background)/.8)] px-4 py-3 text-center text-xs font-semibold text-[hsl(var(--primary))] shadow-[var(--shadow-sm)]">
+                <span className="h-2 w-2 rounded-full bg-[hsl(var(--accent))]" />
+                Camiah · behind the scenes
               </div>
             </div>
             <div>
