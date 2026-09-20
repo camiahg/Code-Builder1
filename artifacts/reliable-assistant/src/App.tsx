@@ -30,7 +30,7 @@ const queryClient = new QueryClient();
 const services: { title: string; body: string; icon: LucideIcon; tag: string }[] = [
   {
     title: 'Inbox, made lighter',
-    body: 'Sort email, flag what needs your eyes, and help keep replies moving so your inbox stops being the place where good intentions go to wait.',
+    body: 'Sort messages, create folders and labels, clear backlogs, and flag priority emails so your inbox stops being the place where good intentions go to wait.',
     icon: Inbox,
     tag: 'Communication',
   },
@@ -48,15 +48,15 @@ const services: { title: string; body: string; icon: LucideIcon; tag: string }[]
   },
   {
     title: 'Customer replies',
-    body: 'Warm, clear responses to common questions, order updates, and follow-ups—written in your voice and escalated when they need you.',
+    body: 'Handle routine FAQ inquiries, order status checks, and polite customer follow-ups with the care that comes from 6+ years of real customer service experience.',
     icon: Mail,
     tag: 'Customer care',
   },
   {
-    title: 'Research, files & details',
-    body: 'Online research, document organization, file cleanup, inventory checks, and other practical tasks that keep your business moving behind the scenes.',
+    title: 'Basic administrative support',
+    body: 'Follow step-by-step instructions, handle basic web forms, organize files, and keep routine operations moving smoothly behind the scenes.',
     icon: PackageCheck,
-    tag: 'Practical help',
+    tag: 'No coding required',
   },
   {
     title: 'Support that grows with me',
@@ -97,7 +97,15 @@ const faqs = [
 function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+  const [formState, setFormState] = useState({
+    name: '',
+    email: '',
+    contactMethod: '',
+    supportType: '',
+    timeline: '',
+    tools: '',
+    message: '',
+  });
   const [sent, setSent] = useState(false);
 
   useEffect(() => {
@@ -109,7 +117,7 @@ function Home() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const subject = `A question for Your Reliable Assistant from ${formState.name || 'a new inquiry'}`;
-    const body = `Name: ${formState.name}\nEmail: ${formState.email}\n\nWhat I need help with:\n${formState.message}`;
+    const body = `Name: ${formState.name}\nEmail: ${formState.email}\nBest way to reach me: ${formState.contactMethod}\nSupport needed: ${formState.supportType}\nTimeline: ${formState.timeline}\nTools/platforms: ${formState.tools}\n\nProject overview:\n${formState.message}`;
     setSent(true);
     window.location.href = `mailto:hello@yourreliableassistant.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
@@ -167,16 +175,16 @@ function Home() {
       <main id="top">
         <section className="container-wide grid min-h-[calc(100dvh-76px)] items-center gap-14 py-16 md:grid-cols-[1.03fr_.97fr] md:gap-10 md:py-20">
           <div className="relative z-10 max-w-[650px]">
-            <div className="reveal eyebrow mb-6 flex items-center gap-3"><span className="h-px w-8 bg-[hsl(var(--accent))]" />Practical support for busy owners</div>
+            <div className="reveal eyebrow mb-6 flex items-center gap-3"><span className="h-px w-8 bg-[hsl(var(--accent))]" />Human execution for digital work</div>
             <h1 className="reveal reveal-delay-1 display-title text-[clamp(3.55rem,8vw,7.8rem)] text-[hsl(var(--primary))]">
-              Less on your plate.<br />
-              <span className="text-[hsl(var(--accent))]">More in motion.</span>
+              AI built your drafts.<br />
+              <span className="text-[hsl(var(--accent))]">Smart tech needs smarter execution.</span>
             </h1>
               <p className="reveal reveal-delay-2 mt-7 max-w-[530px] text-[1.06rem] leading-8 text-[hsl(var(--muted-foreground))]">
-              A reliable second set of hands for the emails, schedules, customer replies, research, and small admin jobs that quietly take over your day.
+              Software generates the noise, but execution takes human precision. I combine computer science literacy, pharmacy accuracy, and real-world operations experience to handle the client messages and back-office cleanups your tech stack leaves behind.
             </p>
             <div className="reveal reveal-delay-3 mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <a href="#contact" className="button-primary focus-ring" data-testid="button-hero-inquiry">Tell me what&apos;s taking time <ArrowRight size={16} /></a>
+              <a href="#contact" className="button-primary focus-ring" data-testid="button-hero-inquiry">Tell me what&apos;s taking your time <ArrowRight size={16} /></a>
               <a href="#pricing" className="button-secondary focus-ring" data-testid="button-hero-pricing">See straightforward pricing <ArrowDownRight size={16} /></a>
             </div>
             <div className="reveal reveal-delay-3 mt-12 flex flex-wrap gap-x-7 gap-y-3 text-[.76rem] font-semibold text-[hsl(var(--muted-foreground))]">
@@ -239,7 +247,7 @@ function Home() {
             <div className="md:sticky md:top-32 md:h-fit">
               <p className="eyebrow">What I can take off your desk</p>
               <h2 className="display-title mt-5 text-5xl text-[hsl(var(--primary))] md:text-6xl">The work behind the work.</h2>
-              <p className="mt-6 max-w-[390px] leading-7 text-[hsl(var(--muted-foreground))]">You do not need a full team to get dependable support. Sometimes you need one thoughtful person to make the moving pieces easier to hold.</p>
+              <p className="mt-6 max-w-[390px] leading-7 text-[hsl(var(--muted-foreground))]">No spreadsheets to build and no coding to learn. You get one thoughtful person to make the moving pieces easier to hold.</p>
               <a href="#contact" className="focus-ring mt-8 inline-flex items-center gap-2 border-b border-[hsl(var(--accent))] pb-2 text-sm font-bold text-[hsl(var(--primary))]" data-testid="link-services-inquiry">Talk through a task <MoveUpRight size={15} /></a>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -339,11 +347,12 @@ function Home() {
             </div>
             <div>
               <p className="eyebrow">A note from me</p>
-              <h2 className="display-title mt-5 text-5xl text-[hsl(var(--primary))] md:text-6xl">Reliable does not have to mean pretending to know everything.</h2>
+              <h2 className="display-title mt-5 text-5xl text-[hsl(var(--primary))] md:text-6xl">Organized. Detail-oriented. Built on real-world trust.</h2>
               <div className="mt-7 max-w-[600px] space-y-5 leading-7 text-[hsl(var(--muted-foreground))]">
-                <p>I have real-world experience helping people, handling customers, solving problems, managing responsibility, inventory, and transactions. I know how much the small details matter when a business has your name on it.</p>
-                <p>I am also honest about where I am: I am growing this business and learning new digital and AI skills as I go. I am not offering AI training right now, but I am learning how to use AI responsibly as a support tool for research, organization, drafting, and repetitive admin work—and I review that work before it reaches you.</p>
-                <p>Your business deserves personal, affordable admin help from someone who takes your work seriously. That is what I am here to offer.</p>
+                <p>Hi, I&apos;m Camiah. I am a Virtual Assistant based in Memphis, combining real-world operational experience with a strong foundation in customer service, system compliance, and basic tech literacy.</p>
+                <p>My background includes introductory Computer Science and IT coursework at UT Martin, basic web building, and a Pharmacy Technician license built around strict confidentiality and regulatory compliance. Across more than six years in retail, pharmacy management, customer service, and logistics with Walgreens, Walmart, and FedEx, I&apos;ve been trusted to manage inventory records, execute quality checks, handle customer communications, and work within high-volume systems.</p>
+                <p>I bring those principles—accuracy, data privacy, and systematic problem-solving—to remote administrative support. I am also continuing to build my digital and AI skills. I am not offering AI training right now, but I may use AI responsibly for research, organization, drafting, and repetitive admin work, with every AI-assisted result reviewed before it reaches you.</p>
+                <p>When I&apos;m not solving operational puzzles or studying for my next IT certification, I enjoy local art museums, new cultural food spots, the gym, good music, and road trips with my son.</p>
               </div>
               <div className="mt-9 flex flex-wrap gap-3 text-xs font-semibold">
                 <span className="rounded-full border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-2">Personal attention</span>
@@ -405,8 +414,14 @@ function Home() {
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Your name</span><input required value={formState.name} onChange={(event) => setFormState({ ...formState, name: event.target.value })} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" placeholder="What should I call you?" data-testid="input-name" /></label>
                 <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Your email</span><input required type="email" value={formState.email} onChange={(event) => setFormState({ ...formState, email: event.target.value })} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" placeholder="you@yourbusiness.com" data-testid="input-email" /></label>
+                <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Best way to reach you</span><select required value={formState.contactMethod} onChange={(event) => setFormState({ ...formState, contactMethod: event.target.value })} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" data-testid="select-contact-method"><option value="" disabled>Choose one</option><option>Email</option><option>Phone call</option><option>Text message</option></select></label>
+                <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">What support do you need?</span><select required value={formState.supportType} onChange={(event) => setFormState({ ...formState, supportType: event.target.value })} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" data-testid="select-support-type"><option value="" disabled>Choose one</option><option>Inbox cleanup</option><option>Customer support replies</option><option>Basic administrative task</option><option>Research or organization</option><option>Something else</option></select></label>
               </div>
-              <label className="mt-5 block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">What would you like help with?</span><textarea required value={formState.message} onChange={(event) => setFormState({ ...formState, message: event.target.value })} className="focus-ring min-h-[148px] w-full resize-y rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm leading-6 outline-none transition-colors focus:border-[hsl(var(--accent))]" placeholder="A messy list is welcome. Tell me what keeps getting pushed back." data-testid="input-message" /></label>
+              <div className="mt-5 grid gap-5 sm:grid-cols-2">
+                <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Timeline</span><select required value={formState.timeline} onChange={(event) => setFormState({ ...formState, timeline: event.target.value })} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" data-testid="select-timeline"><option value="" disabled>Choose one</option><option>ASAP</option><option>This week</option><option>Flexible</option></select></label>
+                <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Tools or platforms</span><input value={formState.tools} onChange={(event) => setFormState({ ...formState, tools: event.target.value })} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" placeholder="Gmail, Outlook, Shopify, etc." data-testid="input-tools" /></label>
+              </div>
+              <label className="mt-5 block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Project overview</span><textarea required value={formState.message} onChange={(event) => setFormState({ ...formState, message: event.target.value })} className="focus-ring min-h-[148px] w-full resize-y rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm leading-6 outline-none transition-colors focus:border-[hsl(var(--accent))]" placeholder="A messy list is welcome. Tell me what keeps getting pushed back." data-testid="input-message" /></label>
               <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"><button type="submit" className="button-primary focus-ring" data-testid="button-submit-inquiry">Open an email draft <ArrowRight size={16} /></button><span className="text-xs leading-5 text-[hsl(var(--muted-foreground))]">This opens your email app—no account needed.</span></div>
               {sent && <p role="status" className="mt-5 rounded-xl bg-[hsl(var(--secondary))] px-4 py-3 text-sm font-semibold text-[hsl(var(--primary))]" data-testid="status-inquiry-sent">Your email draft is ready to send. I look forward to reading it.</p>}
             </form>
