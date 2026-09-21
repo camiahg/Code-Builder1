@@ -121,7 +121,7 @@ function Home() {
     const subject = `A question for Your Reliable Assistant from ${formState.name || 'a new inquiry'}`;
     const body = `Name: ${formState.name}\nEmail: ${formState.email}\nBest way to reach me: ${formState.contactMethod}\nSupport needed: ${formState.supportType}\nTimeline: ${formState.timeline}\nTools/platforms: ${formState.tools}\n\nProject overview:\n${formState.message}`;
     setSent(true);
-    window.location.href = `mailto:hello@yourreliableassistant.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:hello.yourreliableassistant@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   const updateField = (field: keyof typeof formState, value: string) =>
@@ -406,7 +406,7 @@ function Home() {
               <p className="eyebrow">Your next small step</p>
               <h2 className="display-title mt-5 text-5xl text-[hsl(var(--primary))] md:text-7xl">Let&apos;s make your list feel possible.</h2>
               <p className="mt-7 max-w-[400px] leading-7 text-[hsl(var(--muted-foreground))]">Tell me what is on your plate. You will get a thoughtful reply, not a sales funnel.</p>
-              <div className="mt-10 flex items-center gap-3 text-sm font-semibold text-[hsl(var(--primary))]"><Mail size={17} className="text-[hsl(var(--accent))]" /><a className="focus-ring rounded-sm underline decoration-[hsl(var(--accent))] underline-offset-4" href="mailto:hello@yourreliableassistant.com" data-testid="link-email">hello@yourreliableassistant.com</a></div>
+              <div className="mt-10 flex items-center gap-3 text-sm font-semibold text-[hsl(var(--primary))]"><Mail size={17} className="text-[hsl(var(--accent))]" /><a className="focus-ring rounded-sm underline decoration-[hsl(var(--accent))] underline-offset-4" href="mailto:hello.yourreliableassistant@gmail.com" data-testid="link-email">hello.yourreliableassistant@gmail.com</a></div>
             </div>
             <form onSubmit={handleSubmit} className="rounded-[24px] border border-[hsl(var(--border))] bg-[hsl(var(--background)/.76)] p-6 shadow-[var(--shadow-sm)] md:p-8" data-testid="form-inquiry">
               <div className="grid gap-5 sm:grid-cols-2">
