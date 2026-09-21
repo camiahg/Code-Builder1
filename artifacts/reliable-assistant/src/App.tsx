@@ -1,6 +1,7 @@
 import { type FormEvent, type ReactNode, useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import aboutPhoto from '@assets/0_IMG_2303_1789909271019.jpeg';
+import logoMark from '@assets/reliable-assistant-logo.png';
 import {
   ArrowDownRight,
   ArrowRight,
@@ -123,13 +124,16 @@ function Home() {
     window.location.href = `mailto:hello@yourreliableassistant.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
+  const updateField = (field: keyof typeof formState, value: string) =>
+    setFormState((current) => ({ ...current, [field]: value }));
+
   return (
     <div className="site-shell grain min-h-[100dvh]">
       <header className="sticky top-0 z-40 border-b border-[hsl(var(--border)/.72)] bg-[hsl(var(--background)/.88)] backdrop-blur-xl">
         <div className="container-wide flex h-[76px] items-center justify-between">
           <a href="#top" className="focus-ring flex items-center gap-3 rounded-lg" onClick={closeMenu} data-testid="link-brand">
-            <span className="flex h-10 w-10 items-center justify-center rounded-[13px] bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] shadow-[0_8px_18px_rgba(29,79,73,.18)]">
-              <Sparkles size={18} strokeWidth={1.8} />
+            <span className="flex h-10 w-10 items-center justify-center rounded-[13px] bg-[hsl(var(--primary))] p-1 shadow-[0_8px_18px_rgba(29,79,73,.18)]">
+              <img src={logoMark} alt="" className="h-full w-full object-contain" />
             </span>
             <span className="leading-none">
               <span className="block font-display text-[1.05rem] font-semibold tracking-[-.03em]">Your Reliable</span>
@@ -144,14 +148,7 @@ function Home() {
             <a href="#contact" className="button-primary ml-2 !px-5 !py-3" data-testid="link-contact">Let&apos;s talk <ArrowRight size={15} /></a>
           </nav>
 
-          <button
-            type="button"
-            className="focus-ring rounded-lg p-2 md:hidden"
-            onClick={() => setMenuOpen((open) => !open)}
-            aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            aria-expanded={menuOpen}
-            data-testid="button-mobile-menu"
-          >
+          <button type="button" className="focus-ring rounded-lg p-2 md:hidden" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={menuOpen} data-testid="button-mobile-menu">
             {menuOpen ? <X size={23} /> : <Menu size={23} />}
           </button>
         </div>
@@ -181,7 +178,7 @@ function Home() {
               AI built your drafts?<br />
               <span className="text-[hsl(var(--accent))]">Smart tech needs smarter execution.</span>
             </h1>
-              <p className="reveal reveal-delay-2 mt-7 max-w-[530px] text-[1.06rem] leading-8 text-[hsl(var(--muted-foreground))]">
+            <p className="reveal reveal-delay-2 mt-7 max-w-[530px] text-[1.06rem] leading-8 text-[hsl(var(--muted-foreground))]">
               Software generates the noise, but execution takes human precision. I combine computer science literacy, pharmacy accuracy, and real-world operational experience to handle the client messages and back-office cleanups your tech stack leaves behind.
             </p>
             <div className="reveal reveal-delay-3 mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
@@ -221,8 +218,7 @@ function Home() {
                   </div>
                 </div>
                 <div className="mt-5 flex items-center justify-between border-t border-[hsl(var(--primary-foreground)/.2)] pt-4 text-[.68rem] text-[hsl(var(--primary-foreground)/.65)]">
-                  <span>Personal help. No hand-offs.</span>
-                  <ArrowRight size={15} />
+                  <span>Personal help. No hand-offs.</span><ArrowRight size={15} />
                 </div>
               </div>
             </div>
@@ -414,16 +410,16 @@ function Home() {
             </div>
             <form onSubmit={handleSubmit} className="rounded-[24px] border border-[hsl(var(--border))] bg-[hsl(var(--background)/.76)] p-6 shadow-[var(--shadow-sm)] md:p-8" data-testid="form-inquiry">
               <div className="grid gap-5 sm:grid-cols-2">
-                <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Your name</span><input required value={formState.name} onChange={(event) => setFormState({ ...formState, name: event.target.value })} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" placeholder="What should I call you?" data-testid="input-name" /></label>
-                <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Your email</span><input required type="email" value={formState.email} onChange={(event) => setFormState({ ...formState, email: event.target.value })} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" placeholder="you@yourbusiness.com" data-testid="input-email" /></label>
-                <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Best way to reach you</span><select required value={formState.contactMethod} onChange={(event) => setFormState({ ...formState, contactMethod: event.target.value })} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" data-testid="select-contact-method"><option value="" disabled>Choose one</option><option>Email</option><option>Phone call</option><option>Text message</option></select></label>
-                <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">What support do you need?</span><select required value={formState.supportType} onChange={(event) => setFormState({ ...formState, supportType: event.target.value })} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" data-testid="select-support-type"><option value="" disabled>Choose one</option><option>Inbox cleanup</option><option>Customer support replies</option><option>Basic administrative task</option><option>Research or organization</option><option>Something else</option></select></label>
+                <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Your name</span><input required value={formState.name} onChange={(event) => updateField('name', event.target.value)} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" placeholder="What should I call you?" data-testid="input-name" /></label>
+                <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Your email</span><input required type="email" value={formState.email} onChange={(event) => updateField('email', event.target.value)} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" placeholder="you@yourbusiness.com" data-testid="input-email" /></label>
+                <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Best way to reach you</span><select required value={formState.contactMethod} onChange={(event) => updateField('contactMethod', event.target.value)} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" data-testid="select-contact-method"><option value="" disabled>Choose one</option><option>Email</option><option>Phone call</option><option>Text message</option></select></label>
+                <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">What support do you need?</span><select required value={formState.supportType} onChange={(event) => updateField('supportType', event.target.value)} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" data-testid="select-support-type"><option value="" disabled>Choose one</option><option>Inbox cleanup</option><option>Customer support replies</option><option>Basic administrative task</option><option>Research or organization</option><option>Something else</option></select></label>
               </div>
               <div className="mt-5 grid gap-5 sm:grid-cols-2">
-                <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Timeline</span><select required value={formState.timeline} onChange={(event) => setFormState({ ...formState, timeline: event.target.value })} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" data-testid="select-timeline"><option value="" disabled>Choose one</option><option>ASAP</option><option>This week</option><option>Flexible</option></select></label>
-                <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Tools or platforms</span><input value={formState.tools} onChange={(event) => setFormState({ ...formState, tools: event.target.value })} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" placeholder="Gmail, Outlook, Shopify, etc." data-testid="input-tools" /></label>
+                <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Timeline</span><select required value={formState.timeline} onChange={(event) => updateField('timeline', event.target.value)} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" data-testid="select-timeline"><option value="" disabled>Choose one</option><option>ASAP</option><option>This week</option><option>Flexible</option></select></label>
+                <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Tools or platforms</span><input value={formState.tools} onChange={(event) => updateField('tools', event.target.value)} className="focus-ring w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm outline-none transition-colors focus:border-[hsl(var(--accent))]" placeholder="Gmail, Outlook, Shopify, etc." data-testid="input-tools" /></label>
               </div>
-              <label className="mt-5 block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Project overview</span><textarea required value={formState.message} onChange={(event) => setFormState({ ...formState, message: event.target.value })} className="focus-ring min-h-[148px] w-full resize-y rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm leading-6 outline-none transition-colors focus:border-[hsl(var(--accent))]" placeholder="A messy list is welcome. Tell me what keeps getting pushed back." data-testid="input-message" /></label>
+              <label className="mt-5 block"><span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-[hsl(var(--muted-foreground))]">Project overview</span><textarea required value={formState.message} onChange={(event) => updateField('message', event.target.value)} className="focus-ring min-h-[148px] w-full resize-y rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-3 text-sm leading-6 outline-none transition-colors focus:border-[hsl(var(--accent))]" placeholder="A messy list is welcome. Tell me what keeps getting pushed back." data-testid="input-message" /></label>
               <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"><button type="submit" className="button-primary focus-ring" data-testid="button-submit-inquiry">Open an email draft <ArrowRight size={16} /></button><span className="text-xs leading-5 text-[hsl(var(--muted-foreground))]">This opens your email app—no account needed.</span></div>
               {sent && <p role="status" className="mt-5 rounded-xl bg-[hsl(var(--secondary))] px-4 py-3 text-sm font-semibold text-[hsl(var(--primary))]" data-testid="status-inquiry-sent">Your email draft is ready to send. I look forward to reading it.</p>}
             </form>
@@ -435,7 +431,7 @@ function Home() {
         <div className="container-wide grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
           <div>
             <a href="#top" className="focus-ring inline-flex items-center gap-3 rounded-lg" data-testid="link-footer-brand">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[hsl(var(--accent))]"><Sparkles size={17} /></span>
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[hsl(var(--primary-foreground))] p-1"><img src={logoMark} alt="" className="h-full w-full object-contain" /></span>
               <span className="font-display text-2xl">Your Reliable Assistant</span>
             </a>
             <p className="mt-5 max-w-[370px] text-sm leading-6 text-[hsl(var(--primary-foreground)/.65)]">Personal, affordable admin help for the people building something of their own.</p>
